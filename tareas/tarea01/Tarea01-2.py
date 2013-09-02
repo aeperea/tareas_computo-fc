@@ -14,8 +14,8 @@ def recursion(x0,n):
 	return
 	
 n  = 75
-a = mpf(1)
-b = mpf(10e-20)
+a = mpf('1')
+b = mpf('10e-20')
 x0 = a-b
 
 recursion(x0,n)
