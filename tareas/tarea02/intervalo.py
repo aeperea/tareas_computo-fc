@@ -21,7 +21,7 @@ class Intervalo(object):
         return "[{},{}]".format(self.min, self.max)
     
     def __add__(self, otro):
-        if (not isinstance(otro,Intervalo)):
+        if not isinstance(otro,Intervalo):
             otro = Intervalo(otro)
         return Intervalo(self.min + otro.min, self.max + otro.max)
         
@@ -29,7 +29,7 @@ class Intervalo(object):
         return self + otro
     
     def __sub__(self, otro):
-        if (not isinstance(otro,Intervalo)):
+        if not isinstance(otro,Intervalo):
             otro = Intervalo(otro)
         return Intervalo(self.min - otro.max, self.max - otro.min)
     
@@ -37,7 +37,7 @@ class Intervalo(object):
         return self - otro
     
     def __mul__(self, otro):
-        if (not isinstance(otro,Intervalo)):
+        if not isinstance(otro,Intervalo):
             otro = Intervalo(otro)
         a = np.min([self.min*otro.min, self.min*otro.max, self.max*otro.min, self.max*otro.max])
         b = np.max([self.min*otro.min, self.min*otro.max, self.max*otro.min, self.max*otro.max])
@@ -54,7 +54,7 @@ class Intervalo(object):
             return Intervalo(1./self.max,1./self.min)
     
     def __div__(self, otro):
-        if (not isinstance(otro,Intervalo)):
+        if not isinstance(otro,Intervalo):
             otro = Intervalo(otro)
         if otro.min <= 0 & otro.max >= 0:
             return "Error, el intervalo del denominador contiene el cero"
@@ -73,10 +73,10 @@ class Intervalo(object):
     
     # Intersection
     def __and__(self, otro):
-        if (not isinstance(otro,Intervalo)):
+        if not isinstance(otro,Intervalo):
             otro = Intervalo(otro)
         if (self.min > otro.max) | (self.max < otro.min):
-            return 'null'
+            return None
         else:
             a = np.max([self.min, otro.min])
             b = np.min([self.max, otro.max])
@@ -86,7 +86,7 @@ class Intervalo(object):
         return self & otro
     
     def __or__(self, otro):
-        if (not isinstance(otro,Intervalo)):
+        if not isinstance(otro,Intervalo):
             otro = Intervalo(otro)
         if (self.min > otro.max) | (self.max < otro.min):
             return [self, otro]
@@ -99,7 +99,7 @@ class Intervalo(object):
         return self | otro
     
     def hull(self, otro):
-        if (not isinstance(otro,Intervalo)):
+        if not isinstance(otro,Intervalo):
             otro = Intervalo(otro)
         a = np.min([self.min,otro.min])
         b = np.max([self.max,otro.max])
