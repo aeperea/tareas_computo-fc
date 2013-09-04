@@ -70,6 +70,12 @@ class Intervalo(object):
     
     def __neg__(self):
         return Intervalo(-self.max, -self.min)
+        
+    def __eq__(self, otro):
+        if self.min == otro.min and self.max == otro.max:
+            return True
+        else:
+            return False
     
     # Intersection
     def __and__(self, otro):
