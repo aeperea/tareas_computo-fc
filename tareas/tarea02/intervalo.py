@@ -61,7 +61,6 @@ class Intervalo(object):
         else:
             return self * otro.inverse()
     
-    __truediv__ = __div__
     
     def __rdiv__(self, otro):
         return self.inverse() * otro
