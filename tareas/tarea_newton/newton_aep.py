@@ -16,7 +16,8 @@ def h(x) :
     # return x*x*x - 3*x*x + 2*x
     # return x*np.exp(x) - 1
     # return 4*x**3 - 2*x
-    return 0.5*np.sin(x)
+    # return 0.5*np.sin(x)
+    return x*np.sin(1.0/x)
 
 def h_p(x) :
     
@@ -24,7 +25,8 @@ def h_p(x) :
         # return 3*x*x - 6*x + 2
         # return np.exp(x)*x + np.exp(x)
         # return 12*x**2 - 2
-        return 0.5*np.cos(x)
+        # return 0.5*np.cos(x)
+        return np.sin(1.0/x) - np.cos(1.0/x)/x
     
     n = 1000
     epsilon = float(x.hi - x.lo)/n
@@ -42,7 +44,7 @@ def h_p(x) :
         
     return y_final
 
-def met_newton(x, f, f_p, steps = 10000, epsilon = 1e-5) :
+def met_newton(x, f, f_p, steps = 10000, epsilon = 1e-3) :
     # x       - intervalo
     # f       - función
     # f_p     - derivada de la función f
@@ -103,7 +105,9 @@ def met_newton(x, f, f_p, steps = 10000, epsilon = 1e-5) :
         
         if terminar_ciclo == True :
             break
-        index += 1    
+        index += 1
+    
+    intervalos[:] = (value for value in intervalos if value.width() < epsilon)
     ceros = intervalos
     return ceros
 
